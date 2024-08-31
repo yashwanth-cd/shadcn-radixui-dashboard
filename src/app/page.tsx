@@ -319,7 +319,7 @@ const data = [
 export default function Home() {
   return (
     <div className="grid gap-[26px]">
-      <div className="xl:grid xl:grid-cols-2 gap-[32px] md:flex md:flex-col ">
+      <div className="xl:grid xl:grid-cols-2 gap-[32px] md:flex md:flex-col">
         <General />
         <div className="grid gap-[32px]">
           <Calendar />
@@ -327,9 +327,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="xl:grid xl:grid-cols-3 gap-[24px] xl:h-[400px] md:flex md:flex-col sm:mb-6">
+      <div className="xl:grid xl:grid-cols-3 gap-[24px] xl:h-[400px] md:flex md:flex-col sm:mb-6 md:mb-0">
         <Lines />
-        <Card className="p-[4px] overflow-y-scroll sm:mt-6">
+        <Card className="p-[4px] overflow-y-scroll sm:mt-6 md:mt-0">
           <CardHeader>
             <CardTitle>Orders</CardTitle>
             <CardDescription>Transcations Invoice for Orders</CardDescription>
@@ -338,7 +338,7 @@ export default function Home() {
             <TableDemo />
           </CardContent>
         </Card>
-        <Card className="p-[4px] sm:mt-6">
+        <Card className="p-[4px] sm:mt-6 md:mt-0">
           <CardHeader>
             <CardTitle>Users</CardTitle>
             <CardDescription>List of Users</CardDescription>

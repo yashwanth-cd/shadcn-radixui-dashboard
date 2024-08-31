@@ -52,7 +52,7 @@ const chartConfig = {
 
 export function MainChart() {
   return (
-    <Card className="lg:max-h-[400px] xl:max-h-full md:max-h-[400px] mb-6">
+    <Card className="lg:max-h-[400px] xl:max-h-full md:max-h-[400px]">
       <CardHeader>
         <CardTitle>Bar Chart - Custom Label</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -67,7 +67,7 @@ export function MainChart() {
               right: 10,
               top: 10,
               left: 10,
-              bottom: 10,
+              bottom: 5,
             }}
           >
             <CartesianGrid horizontal={false} />
