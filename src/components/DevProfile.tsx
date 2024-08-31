@@ -15,7 +15,10 @@ import Image from "next/image";
 import { Bot, LogOut } from "lucide-react";
 
 export default function DevProfile() {
-  const screenWidth = window.innerWidth;
+  let screenWidth;
+  if (typeof window !== undefined) {
+    screenWidth = window.innerWidth;
+  }
   console.log(screenWidth);
   return (
     <Drawer>
