@@ -1,5 +1,15 @@
 "use client";
 
+import { TrendingUp } from "lucide-react";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  XAxis,
+  YAxis,
+} from "recharts";
+
 import {
   Card,
   CardContent,
@@ -8,379 +18,100 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
-// install (please try to align the version of installed @nivo packages)
-// yarn add @nivo/bump
-import { ResponsiveBump } from "@nivo/bump";
+export const description = "A bar chart with a custom label";
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const MyResponsiveBump = (props: any) => (
-  <ResponsiveBump
-    data={props.data}
-    colors={{ scheme: "spectral" }}
-    lineWidth={3}
-    activeLineWidth={6}
-    inactiveLineWidth={3}
-    inactiveOpacity={0.15}
-    pointSize={10}
-    activePointSize={16}
-    inactivePointSize={0}
-    pointColor={{ theme: "background" }}
-    pointBorderWidth={3}
-    activePointBorderWidth={3}
-    pointBorderColor={{ from: "serie.color" }}
-    axisTop={{
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0,
-      legend: "",
-      legendPosition: "middle",
-      legendOffset: -36,
-      truncateTickAt: 0,
-    }}
-    axisBottom={{
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0,
-      legend: "",
-      legendPosition: "middle",
-      legendOffset: 32,
-      truncateTickAt: 0,
-    }}
-    axisLeft={{
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0,
-      legend: "ranking",
-      legendPosition: "middle",
-      legendOffset: -40,
-      truncateTickAt: 0,
-    }}
-    margin={{ top: 40, right: 100, bottom: 40, left: 60 }}
-    axisRight={null}
-  />
-);
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
 
-export default function General() {
-  const currentMonth = new Date().toLocaleString("default", { month: "long" });
-  const data = [
-    {
-      id: "Serie 1",
-      data: [
-        {
-          x: "2000",
-          y: 9,
-        },
-        {
-          x: "2001",
-          y: 1,
-        },
-        {
-          x: "2002",
-          y: 9,
-        },
-        {
-          x: "2003",
-          y: 7,
-        },
-        {
-          x: "2004",
-          y: 8,
-        },
-      ],
-    },
-    {
-      id: "Serie 2",
-      data: [
-        {
-          x: "2000",
-          y: 3,
-        },
-        {
-          x: "2001",
-          y: 10,
-        },
-        {
-          x: "2002",
-          y: 5,
-        },
-        {
-          x: "2003",
-          y: 2,
-        },
-        {
-          x: "2004",
-          y: 10,
-        },
-      ],
-    },
-    {
-      id: "Serie 3",
-      data: [
-        {
-          x: "2000",
-          y: 4,
-        },
-        {
-          x: "2001",
-          y: 5,
-        },
-        {
-          x: "2002",
-          y: 12,
-        },
-        {
-          x: "2003",
-          y: 6,
-        },
-        {
-          x: "2004",
-          y: 1,
-        },
-      ],
-    },
-    {
-      id: "Serie 4",
-      data: [
-        {
-          x: "2000",
-          y: 8,
-        },
-        {
-          x: "2001",
-          y: 7,
-        },
-        {
-          x: "2002",
-          y: 2,
-        },
-        {
-          x: "2003",
-          y: 4,
-        },
-        {
-          x: "2004",
-          y: 9,
-        },
-      ],
-    },
-    {
-      id: "Serie 5",
-      data: [
-        {
-          x: "2000",
-          y: 11,
-        },
-        {
-          x: "2001",
-          y: 8,
-        },
-        {
-          x: "2002",
-          y: 3,
-        },
-        {
-          x: "2003",
-          y: 8,
-        },
-        {
-          x: "2004",
-          y: 11,
-        },
-      ],
-    },
-    {
-      id: "Serie 6",
-      data: [
-        {
-          x: "2000",
-          y: 1,
-        },
-        {
-          x: "2001",
-          y: 9,
-        },
-        {
-          x: "2002",
-          y: 11,
-        },
-        {
-          x: "2003",
-          y: 5,
-        },
-        {
-          x: "2004",
-          y: 6,
-        },
-      ],
-    },
-    {
-      id: "Serie 7",
-      data: [
-        {
-          x: "2000",
-          y: 5,
-        },
-        {
-          x: "2001",
-          y: 6,
-        },
-        {
-          x: "2002",
-          y: 8,
-        },
-        {
-          x: "2003",
-          y: 11,
-        },
-        {
-          x: "2004",
-          y: 7,
-        },
-      ],
-    },
-    {
-      id: "Serie 8",
-      data: [
-        {
-          x: "2000",
-          y: 12,
-        },
-        {
-          x: "2001",
-          y: 3,
-        },
-        {
-          x: "2002",
-          y: 4,
-        },
-        {
-          x: "2003",
-          y: 10,
-        },
-        {
-          x: "2004",
-          y: 2,
-        },
-      ],
-    },
-    {
-      id: "Serie 9",
-      data: [
-        {
-          x: "2000",
-          y: 10,
-        },
-        {
-          x: "2001",
-          y: 2,
-        },
-        {
-          x: "2002",
-          y: 7,
-        },
-        {
-          x: "2003",
-          y: 12,
-        },
-        {
-          x: "2004",
-          y: 4,
-        },
-      ],
-    },
-    {
-      id: "Serie 10",
-      data: [
-        {
-          x: "2000",
-          y: 2,
-        },
-        {
-          x: "2001",
-          y: 11,
-        },
-        {
-          x: "2002",
-          y: 1,
-        },
-        {
-          x: "2003",
-          y: 1,
-        },
-        {
-          x: "2004",
-          y: 5,
-        },
-      ],
-    },
-    {
-      id: "Serie 11",
-      data: [
-        {
-          x: "2000",
-          y: 6,
-        },
-        {
-          x: "2001",
-          y: 4,
-        },
-        {
-          x: "2002",
-          y: 10,
-        },
-        {
-          x: "2003",
-          y: 9,
-        },
-        {
-          x: "2004",
-          y: 12,
-        },
-      ],
-    },
-    {
-      id: "Serie 12",
-      data: [
-        {
-          x: "2000",
-          y: 7,
-        },
-        {
-          x: "2001",
-          y: 12,
-        },
-        {
-          x: "2002",
-          y: 6,
-        },
-        {
-          x: "2003",
-          y: 3,
-        },
-        {
-          x: "2004",
-          y: 3,
-        },
-      ],
-    },
-  ];
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "hsl(var(--chart-2))",
+  },
+  label: {
+    color: "hsl(var(--background))",
+  },
+} satisfies ChartConfig;
 
+export function MainChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sales Chart</CardTitle>
-        <CardDescription>
-          Analytics for the <b>{currentMonth}</b>
-        </CardDescription>
+        <CardTitle>Bar Chart - Custom Label</CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4 h-[350px] max-w-[660px]">
-        <MyResponsiveBump data={data} />
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+            layout="vertical"
+            margin={{
+              right: 30,
+              top: 25,
+              left: 30,
+              bottom: 30,
+            }}
+          >
+            <CartesianGrid horizontal={false} />
+            <YAxis
+              dataKey="month"
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <XAxis dataKey="desktop" type="number" />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Bar
+              dataKey="desktop"
+              layout="vertical"
+              fill="var(--color-desktop)"
+              radius={4}
+            >
+              <LabelList
+                dataKey="month"
+                position="insideLeft"
+                offset={8}
+                className="fill-[--color-label]"
+                fontSize={12}
+              />
+              <LabelList
+                dataKey="desktop"
+                position="right"
+                offset={8}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Bar>
+          </BarChart>
+        </ChartContainer>
       </CardContent>
     </Card>
   );
+}
+
+export default function General() {
+  return <MainChart />;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { BellIcon } from "lucide-react";
+import { BellIcon, MoonStar } from "lucide-react";
 import { CommandDemo } from "./Command";
 import { Button } from "./ui/button";
 import {
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
-export default function Header() {
+export default function Header(props: any) {
   const [notifications, setNotifications] = useState<any>([
     {
       text: "This is a notification",
@@ -44,10 +44,22 @@ export default function Header() {
   return (
     <div className="p-4 border-b gap-4 grid grid-cols-2">
       <CommandDemo />
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end gap-4">
+        <Button
+          variant="outline"
+          size="icon"
+          className="p-2"
+          onClick={props.handleDarkMode}
+        >
+          <MoonStar />
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="relative border p-3 f">
+            <Button
+              variant="outline"
+              size="default"
+              className="relative border p-3 f"
+            >
               <div
                 className={`h-5 w-5 text-white flex items-right justify-center rounded-full my-1 absolute -top-2 -right-1 ${
                   notifications.find((x: any) => x.isRead === true)
