@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
 export default function Layout(props: any) {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(true);
+  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  console.log(screenWidth);
 
   function handleSidebarToggle() {
     setIsSidebarOpen((val: boolean) => !val);
@@ -16,27 +18,36 @@ export default function Layout(props: any) {
     setIsDarkModeOn((val: boolean) => !val);
   }
 
+  // Updating the screen width on screen resize
+  useEffect(() => {
+    function updateScreenWidth() {
+      setScreenWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", updateScreenWidth);
+
+    if (screenWidth < 1280) {
+      setIsSidebarOpen(false);
+    }
+
+    return () => window.removeEventListener("resize", updateScreenWidth);
+  }, [screenWidth]);
+
   return (
-    <div className="flex items-start justify-between min-h-screen">
+    <div className="flex items-start justify-start lg:min-w-fit min-h-screen sm:-z-20">
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         handleSidebarToggle={handleSidebarToggle}
       />
-      <main className="grid h-full w-full">
+      <main className="grid h-full">
         <div
-          className={`${
-            isSidebarOpen
-              ? "left-[300px]"
-              : "left-[100px] transition-all duration-300"
-          } fixed top-0 right-0 bg-white/30 backdrop-blur-md z-10`}
+          className={`fixed top-0 right-0 bg-white/30 backdrop-blur-md z-10  transition-all duration-300 ${
+            isSidebarOpen ? "left-[300px] w-[calc(100%-300px)]" : "left-[100px]"
+          } `}
         >
           <Header isDarkModeOn={isDarkModeOn} handleDarkMode={handleDarkMode} />
         </div>
-        <div
-          className={` ${
-            isSidebarOpen ? "transition-all ease-in-out duration-300" : ""
-          } p-6 mt-20`}
-        >
+        <div className={`transition-all ease-in-out duration-300 p-6 mt-20`}>
           {props.children}
         </div>
       </main>

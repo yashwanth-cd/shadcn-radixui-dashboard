@@ -32,7 +32,8 @@
     "recharts": "^2.12.7",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-debug-screens": "^2.2.1"
+    "tailwindcss-debug-screens": "^2.2.1",
+    "vaul": "^0.9.1"
   },
   "devDependencies": {
     "@types/node": "^20",

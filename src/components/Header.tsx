@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import DevProfile from "./DevProfile";
 
 export default function Header(props: any) {
   const [notifications, setNotifications] = useState<any>([
@@ -45,6 +46,9 @@ export default function Header(props: any) {
     <div className="p-4 border-b gap-4 grid grid-cols-2">
       <CommandDemo />
       <div className="flex items-center justify-end gap-4">
+        <Button>
+          <DevProfile />
+        </Button>
         <Button
           variant="outline"
           size="icon"
@@ -63,7 +67,7 @@ export default function Header(props: any) {
               <div
                 className={`h-5 w-5 text-white flex items-right justify-center rounded-full my-1 absolute -top-2 -right-1 ${
                   notifications.find((x: any) => x.isRead === true)
-                    ? "bg-green-500"
+                    ? "bg-red-500"
                     : "bg-neutral-50"
                 }`}
               >
@@ -80,7 +84,7 @@ export default function Header(props: any) {
               >
                 <div
                   className={`h-3 w-3 rounded-full my-1 ${
-                    !item.isRead ? "bg-green-500" : "bg-neutral-200"
+                    !item.isRead ? "bg-red-500" : "bg-neutral-200"
                   }`}
                 ></div>
                 <div>

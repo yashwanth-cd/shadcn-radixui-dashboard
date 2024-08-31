@@ -77,7 +77,7 @@ export default function Sidebar(props: any) {
 
   return (
     <div
-      className={`border-r ${
+      className={`border-r sm:z-30 ${
         props.isSidebarOpen ? "min-w-[300px]" : "min-w-[100px]"
       }`}
     >
@@ -102,7 +102,7 @@ export default function Sidebar(props: any) {
         <div>
           <UserItem isSidebarOpen={props.isSidebarOpen} />
         </div>
-        <div className="grow">
+        <div className="grow md:max-w-[200px]">
           <Command>
             <CommandList>
               {menuList.map((menu: any, key: number) => (
@@ -135,7 +135,6 @@ export default function Sidebar(props: any) {
             </CommandList>
           </Command>
         </div>
-        <div>Settings / Notifications</div>
       </div>
     </div>
   );

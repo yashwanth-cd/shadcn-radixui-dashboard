@@ -52,22 +52,22 @@ const chartConfig = {
 
 export function MainChart() {
   return (
-    <Card>
+    <Card className="lg:max-h-[400px] xl:max-h-full md:max-h-[400px] mb-6">
       <CardHeader>
         <CardTitle>Bar Chart - Custom Label</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="md:max-h-[300px]">
           <BarChart
             accessibilityLayer
             data={chartData}
             layout="vertical"
             margin={{
-              right: 30,
-              top: 25,
-              left: 30,
-              bottom: 30,
+              right: 10,
+              top: 10,
+              left: 10,
+              bottom: 10,
             }}
           >
             <CartesianGrid horizontal={false} />

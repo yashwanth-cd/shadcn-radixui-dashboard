@@ -24,7 +24,10 @@ export function CommandDemo() {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <Command className="rounded-lg border md:min-w-[450px]">
+    <Command
+      className="rounded-lg border md:min-w-[450px] lg:max-w-max
+    "
+    >
       <CommandInput placeholder="Type a command or search..." />
 
       {open && (
