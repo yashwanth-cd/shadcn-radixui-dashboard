@@ -7,7 +7,26 @@ import Sidebar from "./Sidebar";
 export default function Layout(props: any) {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(true);
-  const [screenWidth, setScreenWidth] = useState<number>(1280);
+  const windowSize = useWindowSize();
+
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState(0);
+
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize(window.innerWidth);
+      }
+      window.addEventListener("resize", handleResize);
+      handleResize();
+
+      // Check the screen width initially
+      if (windowSize < 1280) {
+        setIsSidebarOpen(false);
+      }
+
+      return () => window.removeEventListener("resize", handleResize);
+    }, [windowSize]);
+  }
 
   function handleSidebarToggle() {
     setIsSidebarOpen((val: boolean) => !val);
@@ -16,24 +35,6 @@ export default function Layout(props: any) {
   function handleDarkMode() {
     setIsDarkModeOn((val: boolean) => !val);
   }
-
-  // Updating the screen width on screen resize
-  useEffect(() => {
-    function updateScreenWidth() {
-      setScreenWidth(window.innerWidth);
-    }
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", updateScreenWidth);
-
-      // Check the screen width initially
-      if (screenWidth < 1280) {
-        setIsSidebarOpen(false);
-      }
-
-      return () => window.removeEventListener("resize", updateScreenWidth);
-    }
-  }, [screenWidth]);
 
   return (
     <div className="flex items-start justify-start lg:min-w-fit min-h-screen sm:-z-20">
