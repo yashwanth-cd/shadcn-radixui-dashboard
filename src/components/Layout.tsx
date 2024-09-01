@@ -7,8 +7,7 @@ import Sidebar from "./Sidebar";
 export default function Layout(props: any) {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(true);
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  console.log(screenWidth);
+  const [screenWidth, setScreenWidth] = useState<number>(1280);
 
   function handleSidebarToggle() {
     setIsSidebarOpen((val: boolean) => !val);
@@ -24,13 +23,16 @@ export default function Layout(props: any) {
       setScreenWidth(window.innerWidth);
     }
 
-    window.addEventListener("resize", updateScreenWidth);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", updateScreenWidth);
 
-    if (screenWidth < 1280) {
-      setIsSidebarOpen(false);
+      // Check the screen width initially
+      if (screenWidth < 1280) {
+        setIsSidebarOpen(false);
+      }
+
+      return () => window.removeEventListener("resize", updateScreenWidth);
     }
-
-    return () => window.removeEventListener("resize", updateScreenWidth);
   }, [screenWidth]);
 
   return (
